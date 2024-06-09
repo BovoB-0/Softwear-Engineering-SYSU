@@ -1,0 +1,102 @@
+@startuml
+class JSONComponent {
+    +display(indent, is_last, icon_family, style, is_root)
+}
+
+class JSONLeaf {
+    -key: str
+    -value: str
+    +display(indent, is_last, icon_family, style, is_root)
+}
+
+class JSONComposite {
+    -key: str
+    -children: list
+    +add(component)
+    +display(indent, is_last, icon_family, style, is_root)
+}
+
+JSONComponent <|-- JSONLeaf
+JSONComponent <|-- JSONComposite
+
+class JSONFactory {
+    +create_renderer()
+}
+
+class JSONTreeFactory {
+    +create_renderer()
+}
+
+class JSONRectangleFactory {
+    +create_renderer()
+}
+
+JSONFactory <|.. JSONTreeFactory
+JSONFactory <|.. JSONRectangleFactory
+
+class JSONRenderer {
+    +render(data, level)
+}
+
+class JSONTreeRenderer {
+    +render(data, level)
+}
+
+class JSONRectangleRenderer {
+    +render(data, level)
+}
+
+JSONRenderer <|.. JSONTreeRenderer
+JSONRenderer <|.. JSONRectangleRenderer
+
+class IconFamily {
+    +get_icon(type)
+}
+
+class PokerFaceIconFamily {
+    +get_icon(type)
+}
+
+class StarIconFamily {
+    +get_icon(type)
+}
+
+IconFamily <|.. PokerFaceIconFamily
+IconFamily <|.. StarIconFamily
+
+class JSONBuilder {
+    +build(data)
+    +get_result()
+}
+
+JSONBuilder --> JSONComponent
+
+note "Represents leaf nodes in the JSON structure." as N1
+note "Represents composite nodes in the JSON structure. Can contain children." as N2
+note "Abstract base class for JSON elements." as N3
+note "Abstract factory class for creating renderers." as N4
+note "Concrete factory for creating tree-style renderers." as N5
+note "Concrete factory for creating rectangle-style renderers." as N6
+note "Abstract base class for JSON renderers." as N7
+note "Renderer for tree-style JSON output." as N8
+note "Renderer for rectangle-style JSON output." as N9
+note "Abstract base class for icon families." as N10
+note "Concrete icon family with poker face icons." as N11
+note "Concrete icon family with star icons." as N12
+note "Class for building JSON structures." as N13
+
+JSONLeaf .. N1
+JSONComposite .. N2
+JSONComponent .. N3
+JSONFactory .. N4
+JSONTreeFactory .. N5
+JSONRectangleFactory .. N6
+JSONRenderer .. N7
+JSONTreeRenderer .. N8
+JSONRectangleRenderer .. N9
+IconFamily .. N10
+PokerFaceIconFamily .. N11
+StarIconFamily .. N12
+JSONBuilder .. N13
+
+@enduml
