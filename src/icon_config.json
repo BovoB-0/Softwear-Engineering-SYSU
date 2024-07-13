@@ -1,0 +1,18 @@
+{
+    "default": {
+        "inner": "",
+        "leaf": ""
+    },
+    "pokerface": {
+        "inner": "♢",
+        "leaf": "♤"
+    },
+    "star": {
+        "inner": "★",
+        "leaf": "☆"
+    },
+    "emoji": {
+        "inner": "😊",
+        "leaf": "🍎"
+    }
+}
